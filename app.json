@@ -3,9 +3,10 @@
     "name": "weather_2",
     "slug": "weather_2",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "com.devdooot.weather"
+    }
   },
   "name": "weather_2"
 }
