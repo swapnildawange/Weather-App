@@ -5,6 +5,7 @@ import { NativeBaseProvider } from "native-base";
 import React from "react";
 import "react-native-gesture-handler";
 import Home from "./src/screens/Home";
+import Next from "./src/screens/Next";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,11 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={Home}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Next"
+            component={Next}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

@@ -4,7 +4,7 @@ import Constants from "expo-constants";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Location from "expo-location";
 import Moment from "moment";
-import { Icon, IconButton, Image, Input } from "native-base";
+import { ChevronRightIcon, Icon, IconButton, Image, Input } from "native-base";
 import React, { useEffect, useState } from "react";
 import {
   ScrollView,
@@ -34,12 +34,7 @@ const Home = ({ navigation }) => {
   const [isShowInput, setIsShowInput] = useState(false);
   const [cityName, setCityName] = useState("Nashik");
   const [hourlyData, setHourlyData] = useState([]);
-
-  console.log("data", data);
-  console.log("error", error);
-  useEffect(() => {
-    getWeather();
-  }, []);
+  const [dailyData, setDailyData] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -76,6 +71,7 @@ const Home = ({ navigation }) => {
     )
       .then(({ data }) => {
         setHourlyData(data.hourly);
+        setDailyData(data.daily);
       })
       .catch((err) => {
         console.log("err", err);
@@ -267,25 +263,30 @@ const Home = ({ navigation }) => {
             Today
           </Text>
 
-          {/* <TouchableOpacity
-          onPress={() => navigation.navigate("NextPage")}
-          style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Text
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Next", {
+                dailyData,
+                cityName,
+              })
+            }
             style={{
-              color: "#11618E",
-              fontWeight: "bold",
-              fontSize: 16,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            next 7 days
-          </Text>
-          <ChevronRightIcon color="#11618E" size="5" />
-        </TouchableOpacity> */}
+            <Text
+              style={{
+                color: "#11618E",
+                fontWeight: "bold",
+                fontSize: 16,
+              }}
+            >
+              next 7 days
+            </Text>
+            <ChevronRightIcon color="#11618E" size="5" />
+          </TouchableOpacity>
         </View>
         <View style={{ flex: 1 }}>
           <ScrollView
